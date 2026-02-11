@@ -101,38 +101,51 @@ const ContactPage = () => {
       toast({
         title: "Validation Error",
         description: "Please fill in all required fields correctly.",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
 
     setIsSubmitting(true);
+    setIsSubmitted(false);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const payload = new FormData();
+      payload.append("name", formData.name);
+      payload.append("email", formData.email);
+      payload.append("company", formData.company);
+      payload.append("message", formData.message);
+
+      const res = await fetch("/contact.php", {
+        method: "POST",
+        body: payload,
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error("Submission failed");
+      }
+
       setIsSubmitted(true);
-      
-      toast({
-        title: "Message Sent Successfully!",
-        description: "Thank you! We'll contact you at info@tabartore.com shortly",
-        duration: 5000
-      });
-
-      // Reset form
       setFormData({
-        name: '',
-        email: '',
-        company: '',
-        message: ''
+        name: "",
+        email: "",
+        company: "",
+        message: "",
       });
 
-      // Reset success state after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-    }, 1500);
+    } catch (err) {
+      toast({
+        title: "Submission Failed",
+        description: "Please try again later or email us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    } 
   };
+
 
   return (
     <>
@@ -213,7 +226,7 @@ const ContactPage = () => {
                 </div>
               </motion.div>
 
-              {/* Contact Form 
+              {/* Contact Form */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -358,7 +371,6 @@ const ContactPage = () => {
                   </form>
                 </div>
               </motion.div>
-              */}
             </div>
           </div>
         </div>
