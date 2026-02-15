@@ -20,7 +20,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Enterprise consulting for complex, mission-critical projects with 15+ years of expertise.
+              Enterprise consulting for complex, mission-critical projects.
             </p>
           </div>
 
@@ -53,6 +53,7 @@ const Footer = () => {
               <Mail size={16} className="group-hover:scale-110 transition-transform" />
               <span>info@tabartore.com</span>
             </a>
+            <p className="text-sm text-gray-400">Dublin, Ireland.</p>
           </div>
         </div>
 

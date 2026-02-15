@@ -108,7 +108,7 @@ const AboutPage = () => {
               About <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Tabartore Solutions</span>
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
-              Delivering excellence in enterprise consulting with over 15 years of specialized expertise
+              Delivering excellence in enterprise consulting with over 15+ years of specialized expertise
             </p>
           </motion.div>
         </div>
@@ -131,7 +131,7 @@ const AboutPage = () => {
               </h2>
               <div className="space-y-4 text-lg text-slate-700 leading-relaxed">
                 <p>
-                  With over <strong className="text-blue-600">15 years of consulting experience</strong>, Tabartore Solutions Limited has established itself as a trusted partner for organizations tackling their most complex and mission-critical projects.
+                  With over <strong className="text-blue-600">15+ years of consulting experience</strong>, Tabartore Solutions Limited has established itself as a trusted partner for organizations tackling their most complex and mission-critical projects.
                 </p>
                 <p>
                   Our journey spans across the <strong className="text-blue-600">UK, Ireland, and Europe</strong>, delivering solutions that combine deep technical expertise with practical business acumen. We've worked in both customer-facing and development environments, giving us a unique perspective on what it takes to deliver successful enterprise projects.
