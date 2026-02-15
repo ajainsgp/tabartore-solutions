@@ -54,6 +54,7 @@ const Footer = () => {
               <span>info@tabartore.com</span>
             </a>
             <p className="text-sm text-gray-400">Dublin, Ireland.</p>
+            <p className="text-sm text-gray-400">Mobile: </p>
           </div>
         </div>
 
