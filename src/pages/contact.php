@@ -40,7 +40,7 @@ try {
     $mail->Host       = 'smtp.hostinger.com';
     $mail->SMTPAuth   = true;
     $mail->Username   = $emailUser;
-    $mail->Password   = $emailPass;   // ← change
+    $mail->Password   = $emailPass;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
 
@@ -51,7 +51,7 @@ try {
     $mail->addAddress($emailUser);
 
     // Reply to visitor
-    $mail->addReplyTo($email, $name);
+    $mail->addReplyTo('info@tabartore.com', 'Tabartore');
 
     $mail->Subject = 'New Contact Form Submission - Tabartore';
 
