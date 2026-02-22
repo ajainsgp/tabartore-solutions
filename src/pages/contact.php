@@ -9,6 +9,10 @@ require __DIR__ . '/PHPMailer/PHPMailer.php';
 require __DIR__ . '/PHPMailer/SMTP.php';
 require __DIR__ . '/PHPMailer/Exception.php';
 
+$env = parse_ini_file(__DIR__ . '/.env');
+$emailUser = $env['EMAIL_USER'];
+$emailPass = $env['EMAIL_PWD'];
+
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     http_response_code(405);
     echo json_encode(["success" => false]);
@@ -35,16 +39,16 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.hostinger.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'info@tabartore.com';
-    $mail->Password   = 'YOUR_EMAIL_PASSWORD';   // ← change
+    $mail->Username   = $emailUser;
+    $mail->Password   = $emailPass;   // ← change
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
 
     // Sender
-    $mail->setFrom('info@tabartore.com', 'Tabartore Website');
+    $mail->setFrom($emailUser, 'Tabartore Website');
 
     // Receiver
-    $mail->addAddress('info@tabartore.com');
+    $mail->addAddress($emailUser);
 
     // Reply to visitor
     $mail->addReplyTo($email, $name);
