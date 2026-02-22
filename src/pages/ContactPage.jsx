@@ -85,6 +85,19 @@ const ContactPage = () => {
       ...prev,
       [name]: value
     }));
+
+    if (name === 'message') {
+      const trimmedMessage = value.trim();
+      setErrors(prev => ({
+        ...prev,
+        message:
+          trimmedMessage.length > 0 && trimmedMessage.length < 10
+            ? 'Message must be at least 10 characters'
+            : ''
+      }));
+      return;
+    }
+
     // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
@@ -235,7 +248,7 @@ const ContactPage = () => {
               >
                 <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
                   <h2 className="text-3xl font-bold text-slate-900 mb-6">
-                    Send Us a Message
+                    Send us a mail
                   </h2>
 
                   {isSubmitted && (
@@ -333,6 +346,7 @@ const ContactPage = () => {
                       <textarea
                         id="message"
                         name="message"
+                        minLength={10}
                         value={formData.message}
                         onChange={handleChange}
                         rows="6"
@@ -363,7 +377,7 @@ const ContactPage = () => {
                         </>
                       ) : (
                         <>
-                          Send Message
+                          Send Mail
                           <Send className="ml-2 group-hover:translate-x-1 transition-transform" />
                         </>
                       )}
