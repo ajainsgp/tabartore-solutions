@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Navigation from '@/components/Navigation';
@@ -8,6 +8,14 @@ import ServicesPage from '@/pages/ServicesPage';
 import AboutPage from '@/pages/AboutPage';
 import ContactPage from '@/pages/ContactPage';
 import { Toaster } from '@/components/ui/toaster';
+
+function BlogRedirect() {
+  useEffect(() => {
+    window.location.replace('https://blog.tabartore.com');
+  }, []);
+
+  return null;
+}
 
 function App() {
   return (
@@ -29,6 +37,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/blog" element={<BlogRedirect />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>

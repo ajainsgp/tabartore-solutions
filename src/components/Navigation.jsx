@@ -6,11 +6,13 @@ import { Menu, X } from 'lucide-react';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const blogUrl = 'https://blog.tabartore.com';
 
   const navLinks = [
     { path: '/', label: 'Home', ariaLabel: 'Go to Homepage' },
     { path: '/services', label: 'Services', ariaLabel: 'View our Oracle and AI Consulting Services' },
     { path: '/about', label: 'About', ariaLabel: 'Learn about Tabartore Solutions' },
+    { href: blogUrl, label: 'Blog', ariaLabel: 'Visit our WordPress blog at blog.tabartore.com', external: true },
     { path: '/contact', label: 'Contact', ariaLabel: 'Contact our team in UK, Ireland, and Singapore' }
   ];
 
@@ -40,25 +42,38 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="relative px-4 py-2 group"
-                aria-label={link.ariaLabel}
-              >
-                <span className={`text-sm font-medium transition-colors duration-200 ${
-                  isActive(link.path) ? 'text-cyan-300' : 'text-white hover:text-cyan-300'
-                }`}>
-                  {link.label}
-                </span>
-                {isActive(link.path) && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500"
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </Link>
+              link.external ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="relative px-4 py-2 group"
+                  aria-label={link.ariaLabel}
+                >
+                  <span className="text-sm font-medium transition-colors duration-200 text-white hover:text-cyan-300">
+                    {link.label}
+                  </span>
+                </a>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="relative px-4 py-2 group"
+                  aria-label={link.ariaLabel}
+                >
+                  <span className={`text-sm font-medium transition-colors duration-200 ${
+                    isActive(link.path) ? 'text-cyan-300' : 'text-white hover:text-cyan-300'
+                  }`}>
+                    {link.label}
+                  </span>
+                  {isActive(link.path) && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500"
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </Link>
+              )
             ))}
           </div>
 
@@ -87,20 +102,33 @@ const Navigation = () => {
             >
               <div className="py-4 space-y-2">
                 {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-3 rounded-lg transition-colors ${
-                      isActive(link.path)
-                        ? 'bg-blue-800/50 text-cyan-300'
-                        : 'hover:bg-blue-800/30 text-white'
-                    }`}
-                    role="menuitem"
-                    aria-label={link.ariaLabel}
-                  >
-                    {link.label}
-                  </Link>
+                  link.external ? (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block px-4 py-3 rounded-lg transition-colors hover:bg-blue-800/30 text-white"
+                      role="menuitem"
+                      aria-label={link.ariaLabel}
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`block px-4 py-3 rounded-lg transition-colors ${
+                        isActive(link.path)
+                          ? 'bg-blue-800/50 text-cyan-300'
+                          : 'hover:bg-blue-800/30 text-white'
+                      }`}
+                      role="menuitem"
+                      aria-label={link.ariaLabel}
+                    >
+                      {link.label}
+                    </Link>
+                  )
                 ))}
               </div>
             </motion.div>
